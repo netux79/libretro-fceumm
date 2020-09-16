@@ -514,7 +514,7 @@ void retro_set_environment(retro_environment_t cb)
 
 void retro_get_system_info(struct retro_system_info *info)
 {
-   info->need_fullpath = true;
+   info->need_fullpath = false;
    info->valid_extensions = "fds|nes|unif";
    info->library_version = "(SVN)";
    info->library_name = "FCEUmm";
@@ -1191,6 +1191,9 @@ bool retro_load_game(const struct retro_game_info *game)
 
       { 0 },
    };
+   
+   if (!game)
+      return false;
 
    environ_cb(RETRO_ENVIRONMENT_SET_INPUT_DESCRIPTORS, desc);
 
